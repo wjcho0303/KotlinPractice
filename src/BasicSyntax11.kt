@@ -12,4 +12,4 @@ fun main() {
     val animal4: Animal = Dog()
 //    animal4.bark()  // 타입이 Animal 이라 Dog 메서드 불가
     animal4.move()
-}g
+}
