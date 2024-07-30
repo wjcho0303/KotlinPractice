@@ -1,6 +1,6 @@
 import Color.*
 
-fun main(args: Array<String>) {
+fun main() {
     val tradableItem1 = TradableItem("Book", 10000, BLUE)
     val tradableItem2 = TradableItem("Audio")
     val tradableItem3 = TradableItem(15000)

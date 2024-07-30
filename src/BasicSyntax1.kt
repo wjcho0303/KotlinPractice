@@ -1,6 +1,6 @@
 @file:JvmName("BasicSyntax1Kt")
 
-fun main(args: Array<String>) {
+fun main() {
 
     var priceA : Int = 100
     var priceB : Int = 200

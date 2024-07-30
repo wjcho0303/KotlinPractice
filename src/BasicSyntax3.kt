@@ -1,4 +1,4 @@
-fun main(args: Array<String>) {
+fun main() {
     val price1 : Int = 120
     val price2 : Int = 170
 
