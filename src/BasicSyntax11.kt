@@ -1,7 +1,4 @@
-import classes.Animal
-import classes.Cat
-import classes.Chicken
-import classes.Dog
+import classes.*
 
 fun main() {
     val animal1: Cat = Cat()
@@ -21,4 +18,16 @@ fun main() {
     val animal5: Chicken = Chicken()
     animal5.move()
     animal5.eat()
+
+    if (animal1 is Cat) {
+        println("animal1은 Cat이다.")
+    }
+
+    if (animal1 is Animal) {
+        println("animal1은 Animal이다.")
+    }
+
+    if (animal5 is Eatable) {
+        println("animal5는 Eatable이다.")
+    }
 }
