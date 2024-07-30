@@ -1,5 +1,6 @@
 import classes.Animal
 import classes.Cat
+import classes.Chicken
 import classes.Dog
 
 fun main() {
@@ -16,4 +17,8 @@ fun main() {
     val animal4: Animal = Dog()
 //    animal4.bark()  // 타입이 classes.Animal 이라 classes.Dog 메서드 불가
     animal4.move()
+
+    val animal5: Chicken = Chicken()
+    animal5.move()
+    animal5.eat()
 }
