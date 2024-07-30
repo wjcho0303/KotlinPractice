@@ -1,3 +1,5 @@
+package classes
+
 class Dog : Animal() {
     override fun move() {
         super.move()

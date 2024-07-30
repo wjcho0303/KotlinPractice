@@ -1,4 +1,6 @@
-import Color.*
+package classes
+
+import classes.Color.*
 
 class Item(
     // primary constructor (주생성자)
@@ -41,6 +43,6 @@ class Item(
     init {
         // require 조건 불만족 시 IllegalArgumentException 발생 및 입력한 문자열 출력
         // require(price != null && price >= 0) {"Price cannot be negative."}
-        println("Item created: name = $name, price = $price, color = $color")
+        println("classes.Item created: name = $name, price = $price, color = $color")
     }
 }

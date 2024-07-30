@@ -1,4 +1,5 @@
-import Color.*
+import classes.Color.*
+import classes.TradableItem
 
 fun main() {
     val tradableItem1 = TradableItem("Book", 10000, BLUE)
