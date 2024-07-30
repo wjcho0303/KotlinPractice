@@ -1,6 +1,10 @@
+import Color.*
+
 fun main(args: Array<String>) {
-    val item1 = Item("Book", 10000)
+    val item1 = Item("Book", 10000, BLUE)
     val item2 = Item("Audio")
+    val item3 = Item(15000)
+    val item4 = Item()
 }
 
 /**
@@ -10,8 +14,10 @@ fun main(args: Array<String>) {
  */
 class Item(
     // primary constructor (주생성자)
-    val name: String,
-    val price: Int
+    // 주생성자에 미리 초기화 값을 정의해놓아야 부생성자에서 프로퍼티를 생략할 수 있다.
+    val name: String? = "",
+    val price: Int? = -1,
+    val color: Color? = null
 ) {
     /**
      *  secondary constructor (부생성자, 보조생성자)
@@ -19,9 +25,20 @@ class Item(
      */
     constructor(name: String) : this(
         name = name,
-        price = 9300
-    // , code = 50
+        price = 9300,
+        color = RED
+        // code = 50
         // 주생성자에 선언되지 않은 프로퍼티는 부생성자에서 프로퍼티로 사용할 수 없다
+    )
+    constructor(price: Int) : this(
+        name = null,
+        price = price,
+        color = GREEN
+    )
+    constructor() : this(
+        name = null,
+        price = null,
+        color = null
     )
 
     /**
@@ -34,7 +51,7 @@ class Item(
      */
     init {
         // require 조건 불만족 시 IllegalArgumentException 발생 및 입력한 문자열 출력
-        require(price >= 0) {"Price cannot be negative."}
-        println("Item created: name = $name, price = $price")
+        // require(price != null && price >= 0) {"Price cannot be negative."}
+        println("Item created: name = $name, price = $price, color = $color")
     }
 }
