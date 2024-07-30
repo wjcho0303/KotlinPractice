@@ -1,12 +1,12 @@
 import Color.*
 
-class Item(
+class TradableItem(
     // primary constructor (주생성자)
     // 주생성자에 미리 초기화 값을 정의해놓은 프로퍼티는 부생성자에서 프로퍼티를 생략할 수 있다.
     val name: String? = "",
     val price: Int? = -1,
     val color: Color? = null
-) {
+) : ItemTrade {
     /**
      *  secondary constructor (부생성자, 보조생성자)
      *  name 만을 파라미터로 받고, price 는 기본값인 9300 으로 설정
@@ -42,5 +42,13 @@ class Item(
         // require 조건 불만족 시 IllegalArgumentException 발생 및 입력한 문자열 출력
         // require(price != null && price >= 0) {"Price cannot be negative."}
         println("Item created: name = $name, price = $price, color = $color")
+    }
+
+    override fun buy() {
+        println("[buy] $name")
+    }
+
+    override fun sell() {
+        println("[sell] $name")
     }
 }
