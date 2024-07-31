@@ -7,15 +7,15 @@
 - `val` (value): 불변 변수. 한번 값이 할당되면 변경할 수 없습니다.
 - `var` (variable): 가변 변수. 값을 변경할 수 있습니다.
 
-val name: String = "Alice"  // 불변 변수
-var age: Int = 30           // 가변 변수
+    val name: String = "Alice"  // 불변 변수
+    var age: Int = 30           // 가변 변수
 
 ### 타입 추론
 
 코틀린은 강력한 타입 추론을 지원하므로 변수의 타입을 명시적으로 지정하지 않아도 됩니다. 컴파일러가 자동으로 타입을 추론합니다.
 
-val name = "Alice"  // String 타입으로 추론
-var age = 30        // Int 타입으로 추론
+    val name = "Alice"  // String 타입으로 추론
+    var age = 30        // Int 타입으로 추론
 
 ### 기본 데이터 타입
 
@@ -26,55 +26,55 @@ var age = 30        // Int 타입으로 추론
 - 불리언 타입: `Boolean`
 - 문자열 타입: `String`
 
-val byte: Byte = 1
-val short: Short = 10
-val int: Int = 100
-val long: Long = 1000L
-val float: Float = 10.5F
-val double: Double = 20.5
-val char: Char = 'A'
-val boolean: Boolean = true
-val string: String = "Hello, Kotlin!"
+    val byte: Byte = 1
+    val short: Short = 10
+    val int: Int = 100
+    val long: Long = 1000L
+    val float: Float = 10.5F
+    val double: Double = 20.5
+    val char: Char = 'A'
+    val boolean: Boolean = true
+    val string: String = "Hello, Kotlin!"
 
 ### Null 안전성
 
 코틀린은 NullPointerException을 방지하기 위해 null 안전성을 제공하며, 이는 변수 타입에 `?`를 붙여서 nullable로 표시할 수 있습니다.
 
-val name: String = "Alice"      // Non-nullable
-val nullableName: String? = null  // Nullable
+    val name: String = "Alice"      // Non-nullable
+    val nullableName: String? = null  // Nullable
 
 null 값이 할당될 수 있는 변수는 사용할 때 안전한 호출 연산자 `?.`를 사용하여 null 여부를 체크할 수 있습니다.
 
-val length = nullableName?.length  // nullableName이 null이 아니면 길이를 반환하고, null이면 null 반환
+    val length = nullableName?.length  // nullableName이 null이 아니면 길이를 반환하고, null이면 null 반환
 
 또한, 엘비스 연산자 `?:`를 사용하여 null인 경우 대체 값을 지정할 수 있습니다.
 
-val length = nullableName?.length ?: 0  // nullableName이 null이면 0을 반환
+    val length = nullableName?.length ?: 0  // nullableName이 null이면 0을 반환
 
 ### late-initialized 변수
 
 `lateinit` 키워드는 var로 선언된 프로퍼티에만 사용할 수 있으며, 초기화 시점을 나중으로 미룰 수 있습니다. 주로 클래스 내부에서 사용됩니다.
 
-lateinit var description: String
+    lateinit var description: String
 
-fun setup() {
-    description = "This is a late initialized variable."
-}
-
-fun printDescription() {
-    if (::description.isInitialized) {
-        println(description)
-    } else {
-        println("Description is not initialized")
+    fun setup() {
+        description = "This is a late initialized variable."
     }
-}
+
+    fun printDescription() {
+        if (::description.isInitialized) {
+            println(description)
+        } else {
+            println("Description is not initialized")
+        }
+    }
 
 ### 상수
 
 `const` 키워드를 사용하여 컴파일 시간 상수를 선언할 수 있습니다. `const`는 기본 타입과 String에만 사용할 수 있으며, `val` 앞에 붙여서 사용합니다.
 
-const val PI = 3.14
-const val APP_NAME = "KotlinApp"
+    const val PI = 3.14
+    const val APP_NAME = "KotlinApp"
 
 ### 요약
 
