@@ -1,5 +1,3 @@
-@file:JvmName("BasicSyntax1Kt")
-
 fun main() {
 
     var priceA : Int = 100
