@@ -40,6 +40,18 @@ data class CustomerReview(
         }
 
         // 일반적으로 초기화 로직이 복잡한 경우에는 by lazy 가 유용하지만, 예제의 경우 단순하기 때문에 실용성은 없는 학습용 코드임.
+        // 참고로, return@lazy null 이 식에서 @lazy 는 lazy 블록을 종료시킨다는 의미이다.
+        /**
+            val receipt: SoiReceipt? by lazy {
+                json.decodeFromString(receiptStr ?: return@lazy null)
+            }
+
+            이 코드는 receipt 이라는 변수를 lazy 초기화로 정의하고 있다.
+            lazy 초기화는 receipt 변수의 값이 처음 접근될 때만 계산된다.
+            lazy 블록에서 receiptStr 의 값이 null 인지 확인한다:
+            만약 receiptStr 이 null 이면 return@lazy null 이 실행되어 lazy 블록은 null 을 반환하고, receipt 은 null 로 설정된다.
+            만약 receiptStr 이 null 이 아니면, receiptStr 을 json.decodeFromString()에 전달하여 SoiReceipt 객체를 생성하고 반환한다.
+        */
     }
 
     enum class Columns {
