@@ -1,3 +1,5 @@
+package syntax_study
+
 import classes.*
 
 // 타입 캐스팅

@@ -1,4 +1,4 @@
-// 문자열과 문자
+package syntax_study// 문자열과 문자
 
 fun main() {
     var name = "홍길동"

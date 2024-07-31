@@ -1,3 +1,5 @@
+package syntax_study
+
 fun main() {
     var name: String? = null
     name = "hello"

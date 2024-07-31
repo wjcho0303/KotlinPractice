@@ -1,4 +1,4 @@
-// 타입 캐스팅: 기존 타입 유지
+package syntax_study// 타입 캐스팅: 기존 타입 유지
 
 fun main() {
     var i = 10

@@ -1,3 +1,5 @@
+package syntax_study
+
 // 탑 레벨 상수
 val num1 = 20   // 재대입 불가
 var num2 = 20
@@ -11,7 +13,7 @@ fun main() {
     i = 20
     // num1 = 30
     num2 = 40   // 수정 가능
-    println("num2 = ${num2}")
+    println("num2 = $num2")
 
     val num4 = num3 + 50
     println("num4 = ${num4}")

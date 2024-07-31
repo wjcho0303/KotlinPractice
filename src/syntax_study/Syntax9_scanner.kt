@@ -1,3 +1,5 @@
+package syntax_study
+
 import java.util.*
 
 fun main() {

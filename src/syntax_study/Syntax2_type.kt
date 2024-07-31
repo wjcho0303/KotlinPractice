@@ -1,3 +1,5 @@
+package syntax_study
+
 fun main() {
     println("Hello World!");
 

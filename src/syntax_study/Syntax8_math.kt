@@ -1,4 +1,4 @@
-// import 문 두 개 다 켜면 ambiguous 에러 터진다. max() 가 똑같이 때문이다.
+package syntax_study// import 문 두 개 다 켜면 ambiguous 에러 터진다. max() 가 똑같이 때문이다.
 //import java.lang.Math.*
 import kotlin.math.*
 import kotlin.random.Random

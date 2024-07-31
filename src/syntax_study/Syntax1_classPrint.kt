@@ -1,3 +1,5 @@
+package syntax_study
+
 fun main() {
 
     var priceA : Int = 100
