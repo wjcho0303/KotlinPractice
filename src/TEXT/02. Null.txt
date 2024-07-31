@@ -1,0 +1,103 @@
+코틀린에서 null을 다루는 방법에 대해 자세히 설명드리겠습니다.
+코틀린은 NullPointerException(NPE)을 방지하기 위해 강력한 null 안전성을 제공하는 언어입니다.
+이는 프로그래머가 null 값으로 인한 예외를 미리 방지할 수 있도록 다양한 기능을 제공한다는 의미입니다.
+
+
+
+### Null 안전성 개념
+코틀린에서는 변수에 null 값을 할당할 수 있는지 여부를 명시적으로 지정해야 합니다.
+이를 통해 컴파일 단계에서 null 관련 오류를 방지할 수 있습니다.
+
+- Non-nullable 타입: null 값을 가질 수 없습니다.
+- Nullable 타입: null 값을 가질 수 있습니다.
+
+
+
+### Nullable 타입 선언
+변수에 nullable 타입을 지정하려면 타입 뒤에 `?`를 붙입니다.
+
+    val name: String = "Alice"      // Non-nullable 타입
+    val nullableName: String? = null  // Nullable 타입
+
+
+
+### Null 안전성을 제공하는 연산자들
+#### 안전한 호출 연산자 (Safe Call Operator) `?.`
+nullable 변수에서 멤버를 호출할 때 안전한 호출 연산자를 사용하면,
+변수 값이 null인 경우 null을 반환하고, 그렇지 않은 경우 멤버를 호출합니다.
+
+    val length = nullableName?.length  // nullableName이 null이면 null을 반환
+
+
+
+#### 엘비스 연산자 (Elvis Operator) `?:`
+엘비스 연산자는 nullable 표현식의 결과가 null일 때 대체 값을 지정하는 데 사용됩니다.
+
+    val length = nullableName?.length ?: 0  // nullableName이 null이면 0을 반환
+
+
+
+#### 널 가능성 확인 (Null Check)
+nullable 변수를 사용하기 전에 null 체크를 할 수 있습니다.
+
+    if (nullableName != null) {
+        val length = nullableName.length  // nullableName이 null이 아님을 보장
+    }
+
+
+
+#### 강제 호출 연산자 (Not-null Assertion Operator) `!!`
+nullable 변수에서 강제로 null이 아님을 보장할 때 사용합니다. 만약 null 값이 할당된 경우 예외가 발생합니다.
+
+    val length = nullableName!!.length  // nullableName이 null이면 NPE 발생
+
+
+
+### 안전한 타입 변환
+nullable 타입을 다른 타입으로 변환할 때 안전한 캐스팅 연산자인 `as?`를 사용할 수 있습니다.
+이 연산자는 변환이 실패할 경우 null을 반환합니다.
+
+    val obj: Any? = "Kotlin"
+    val str: String? = obj as? String  // obj가 String 타입이면 변환, 그렇지 않으면 null 반환
+
+
+
+### let 함수
+`let` 함수는 nullable 변수에 대해 블록 내에서 안전하게 연산을 수행할 수 있도록 합니다. 변수가 null이 아닌 경우에만 블록이 실행됩니다.
+
+    nullableName?.let {
+        println(it.length)  // it은 nullableName의 값으로, null이 아님을 보장
+    }
+
+
+
+### 스코프 함수와 Null 안전성
+코틀린의 여러 스코프 함수 (`apply`, `run`, `with`, `let`, `also`)를 사용하여 null 안전성을 더 직관적으로 처리할 수 있습니다.
+특히 `let` 함수는 nullable 타입을 안전하게 다루는 데 유용합니다.
+
+    nullableName?.let { name ->
+        println(name.length)
+    }
+
+
+
+### 데이터 클래스와 Null 안전성
+데이터 클래스를 사용할 때도 nullable 타입을 안전하게 처리할 수 있습니다.
+
+    data class Person(val name: String?, val age: Int)
+
+    val person = Person(null, 25)
+    val nameLength = person.name?.length ?: 0  // person.name이 null이면 0 반환
+
+
+
+### 요약
+코틀린의 null 안전성은 다음과 같은 기능을 제공합니다:
+- Non-nullable과 nullable 타입 구분
+- 안전한 호출 연산자 `?.`
+- 엘비스 연산자 `?:`
+- 강제 호출 연산자 `!!`
+- 안전한 타입 변환 `as?`
+- `let` 함수를 사용한 안전한 처리
+
+이러한 기능들을 통해 코틀린은 null로 인한 예외를 효과적으로 방지하고, 코드를 더 안전하게 작성할 수 있게 합니다.
