@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
-public class DtoStudy {
+public class DtoStudy1 {
 
     //@Data
     //@NoArgsConstructor
@@ -13,7 +13,9 @@ public class DtoStudy {
     class ProductDTO {
 
         private String id;
+
         private String name;
+
         private String category;
 
         /**@JsonProperty("unit_sales")*/
