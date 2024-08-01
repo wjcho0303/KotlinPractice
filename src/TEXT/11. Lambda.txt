@@ -1,0 +1,195 @@
+코틀린에서 람다식은 함수형 프로그래밍 패러다임을 지원하는 중요한 기능입니다.
+람다식의 문법은 매우 유연하고 강력하여 다양한 프로그래밍 패턴을 구현할 수 있습니다.
+
+
+
+### 1. 기초 문법
+1.1. 기본 형태
+람다식의 기본 형태는 다음과 같습니다:
+기본형)
+    val lambdaName: (Type1, Type2, ...) -> ReturnType = { param1: Type1, param2: Type2, ... ->
+        // 표현식 또는 블록
+    }
+
+예시)
+    val add: (Int, Int) -> Int = { x, y ->
+        x + y
+    }
+    println(add(3, 4))  // 7
+
+
+1.2. it 키워드
+람다식의 매개변수가 하나만 있을 때는 it을 사용하여 매개변수를 참조할 수 있습니다.
+    val double: (Int) -> Int = { it * 2 }
+    println(double(5))  // 10
+
+
+
+### 2. 람다식 블록과 표현식
+람다식의 본문은 하나의 표현식일 수도 있고, 여러 문장을 포함하는 블록일 수도 있습니다.
+
+2.1. 표현식 형태
+람다식 본문이 단일 표현식으로 구성됩니다. 표현식의 결과가 자동으로 반환됩니다.
+    val square: (Int) -> Int = { x -> x * x }
+    println(square(4))  // 16
+
+
+2.2. 블록 형태
+블록 형태의 람다식은 여러 문장을 포함할 수 있으며, 가장 마지막 문장에 있는 것이 반환됩니다.
+    val formatString: (String) -> String = { input ->
+        val trimmed = input.trim()
+        "Formatted: $trimmed"
+    }
+    println(formatString("  Hello, World!  "))  // Formatted: Hello, World!
+
+
+
+### 3. 람다식의 문법 요소
+3.1. 매개변수 타입 생략
+매개변수 타입은 생략할 수 있으며, 컴파일러가 타입을 추론합니다.
+    val multiply = { a: Int, b: Int -> a * b }
+    println(multiply(3, 4))  // 12
+
+타입을 명시적으로 지정하지 않고도 a와 b의 타입이 Int로 추론됩니다.
+
+
+3.2. 람다식과 인자
+람다식은 함수의 인자로 전달될 수 있으며, 이 경우 인자에 대해 특정 타입의 람다식을 기대합니다.
+    fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
+        return operation(a, b)
+    }
+
+    val result = operateOnNumbers(5, 10) { x, y -> x + y }
+    println(result)  // 15
+
+
+
+### 4. 고급 문법
+4.1. 람다식의 return 키워드
+람다식 내부에서 return 키워드를 사용하여 람다식을 즉시 종료할 수 있습니다.
+주의할 점은 return이 람다식 자체를 종료하는 것이며, 람다식을 호출한 함수의 실행 흐름에 영향을 미치지는 않습니다.
+
+예시1)
+    val divide: (Int, Int) -> Int = { x, y ->
+        if (y == 0) return@divide 0  // return@divide로 람다식의 실행을 종료
+        x / y
+    }
+    println(divide(10, 2))  // 5
+    println(divide(10, 0))  // 0
+
+return@divide는 람다식의 실행을 종료하고, 호출하는 함수에는 영향을 미치지 않습니다.
+
+예시2)
+    fun findFirstNegative(numbers: List<Int>): Int? {
+        return numbers.firstOrNull { number ->
+            if (number < 0) return@firstOrNull number  // 첫 번째 음수를 찾으면 반환
+            false
+        }
+    }
+    println(findFirstNegative(listOf(1, 2, 3, -4, 5)))  // -4
+    println(findFirstNegative(listOf(1, 2, 3, 4, 5)))  // null
+
+예시3)
+    val isEven: (Int) -> Boolean = { number ->
+        if (number % 2 == 0) return@isEven true  // 짝수인 경우 true 반환
+        false
+    }
+    println(isEven(4))  // true
+    println(isEven(7))  // false
+
+예시4)
+    val calculateDiscount: (Double) -> Double = { price ->
+        val discount = if (price > 100) 0.1 else 0.05
+        if (price > 200) return@calculateDiscount price * (1 - discount)  // 가격이 200 이상일 때 할인 적용
+        price * (1 - discount)
+    }
+    println(calculateDiscount(250.0))  // 225.0
+    println(calculateDiscount(150.0))  // 142.5
+    println(calculateDiscount(80.0))   // 76.0
+
+
+4.2. 람다식의 수명 주기
+람다식은 일급 객체로 다루어지며, 변수에 할당하거나 반환값으로 사용할 수 있습니다.
+람다식의 수명 주기는 람다식이 할당된 변수나 함수의 범위에 따릅니다.
+
+예시1) 람다식을 반환하는 함수
+    fun createIncrementer(increment: Int): (Int) -> Int {
+        return { number -> number + increment }
+    }
+
+    val incrementBy5 = createIncrementer(5)
+    println(incrementBy5(10))  // 15
+
+createIncrementer 함수는 increment 값을 캡처하는 람다식을 반환합니다. incrementBy5는 이 람다식을 캡처하고, 5를 더하는 함수로 사용됩니다.
+
+예시2) 람다식을 반환하는 함수
+    fun createPowerOf(n: Int): (Int) -> Int {
+        return { x -> x.toDouble().pow(n).toInt() }
+    }
+
+    val square = createPowerOf(2)
+    val cube = createPowerOf(3)
+    println(square(4))  // 16
+    println(cube(2))    // 8
+
+예시3) 클로저와 람다식
+    fun makeCounter(): () -> Int {
+        var count = 0
+        return {
+            count++
+        }
+    }
+
+    val counter = makeCounter()
+    println(counter())  // 1
+    println(counter())  // 2
+    println(counter())  // 3
+
+예시4) 람다식을 인자로 받는 함수
+    fun <T> applyTransformation(value: T, transform: (T) -> T): T {
+        return transform(value)
+    }
+
+    val transformedValue = applyTransformation(5) { it * 2 }
+    println(transformedValue)  // 10
+
+
+4.3. 람다식과 멤버 참조
+람다식 내에서 클래스의 멤버를 참조할 수 있으며, 클래스의 인스턴스나 동반 객체의 메서드를 호출할 수 있습니다.
+
+예시1) 메서드 참조를 사용하는 람다식
+    class Person(val name: String) {
+        fun greet() = "Hello, $name!"
+    }
+
+    val person = Person("John")
+    val greeting: () -> String = person::greet
+    println(greeting())  // Hello, John!
+
+예시2) 동반 객체 메서드 참조
+    class MathUtils {
+        companion object {
+            fun square(x: Int) = x * x
+        }
+    }
+
+    val square: (Int) -> Int = MathUtils::square
+    println(square(4))  // 16
+
+예시3) 프로퍼티 참조 사용
+    class Person(val name: String)
+
+    val nameLength: (Person) -> Int = Person::name.length
+    val person = Person("John Doe")
+    println(nameLength(person))  // 8
+
+
+예시4) 클래스 멤버 함수 참조
+    class StringUtils {
+        fun isUpperCase(s: String) = s.all { it.isUpperCase() }
+    }
+
+    val isUpperCase: (String) -> Boolean = StringUtils()::isUpperCase
+    println(isUpperCase("HELLO"))  // true
+    println(isUpperCase("Hello"))  // false
+
