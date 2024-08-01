@@ -1,0 +1,122 @@
+### 기본적인 연산자들
+사칙연산자(+-*/)
+비교연산자(< > <= >= == !=)
+논리연산자(&&, ||, !)
+증감연산자(++, --)
+
+
+
+### 안전 호출 연산자
+    data class Person(val name: String?, val age: Int?)
+
+    fun main() {
+        val person: Person? = Person(null, 25)
+        val nameLength = person?.name?.length  // person이 null이 아니면 name의 길이를 가져옴, 그렇지 않으면 null
+        println(nameLength)  // null
+    }
+
+
+
+### 엘비스 연산자 ?:
+예시1)
+    fun main() {
+        val name: String? = null
+        val displayName = name ?: "Unknown"  // name이 null이면 "Unknown" 반환
+        println(displayName)  // Unknown
+    }
+
+예시2)
+    fun getGreeting(name: String?): String {
+        return "Hello, ${name ?: "Guest"}"  // name이 null이면 "Guest"를 사용
+    }
+
+    fun main() {
+        println(getGreeting("Alice"))  // Hello, Alice
+        println(getGreeting(null))     // Hello, Guest
+    }
+
+
+
+### 인덱스 연산자 [ ]
+예시1)
+    fun main() {
+        val list = listOf("apple", "banana", "cherry")
+        val fruit = list[1]  // 두 번째 요소인 "banana"를 가져옴
+        println(fruit)  // banana
+    }
+
+예시2)
+    fun main() {
+        val map = mapOf("key1" to "value1", "key2" to "value2")
+        val value = map["key2"]  // 키 "key2"에 해당하는 값 "value2"를 가져옴
+        println(value)  // value2
+    }
+
+
+
+### 범위 연산자 ..
+예시1)
+    fun main() {
+        for (i in 1..5) {
+            print("$i ")  // 1부터 5까지 출력
+        }
+        println()
+    }
+
+예시2)
+    fun main() {
+        val range = 'a'..'d'
+        println('b' in range)  // true
+        println('e' in range)  // false
+    }
+
+
+
+### 인스턴스 확인 연산자 is
+예시1)
+    fun main() {
+        val obj: Any = "Hello"
+        if (obj is String) {
+            println("The object is a String")  // The object is a String
+        }
+    }
+
+예시2)
+    fun processValue(value: Any) {
+        when (value) {
+            is Int -> println("Integer: $value")
+            is String -> println("String: $value")
+            else -> println("Unknown type")
+        }
+    }
+
+    fun main() {
+        processValue(42)      // Integer: 42
+        processValue("Kotlin")  // String: Kotlin
+        processValue(3.14)    // Unknown type
+    }
+
+
+
+### 문자열 템플릿 $
+    fun main() {
+        val age = 30
+        println("I am $age years old.")  // I am 30 years old.
+    }
+
+
+
+### 세이프 캐스팅 as?
+예시1)
+    fun main() {
+        val obj: Any = "Hello"
+        val str: String? = obj as? String  // obj를 String으로 안전하게 캐스팅
+        println(str)  // Hello
+    }
+
+예시2)
+    fun main() {
+        val obj: Any = 123
+        val str: String? = obj as? String  // 캐스팅 실패, null 반환
+        println(str)  // null
+    }
