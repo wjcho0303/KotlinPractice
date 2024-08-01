@@ -1,0 +1,105 @@
+코틀린에서 상속은 객체 지향 프로그래밍의 핵심 개념으로, 클래스 간의 계층 구조를 정의하고 코드 재사용성을 높이는 데 중요한 역할을 합니다.
+코틀린에서는 상속을 지원하지만 몇 가지 중요한 규칙과 특징이 있습니다. 아래에서 코틀린에서 상속을 다루는 방법을 자세히 설명하겠습니다.
+
+
+
+1. 기본 클래스와 서브클래스
+클래스와 메서드는 기본적으로 상속이 불가능하며, 상속하려면 open으로 표시해야 합니다.
+Kotlin의 클래스는 final로 정의되어 있으며 open 키워드 없이는 상속할 수 없습니다.
+':' 기호를 사용하여 조상 클래스를 상속받습니다.
+
+기본 클래스)
+    open class Animal(val name: String) {
+        open fun makeSound() {
+            println("Some generic animal sound")
+        }
+    }
+
+서브 클래스)
+    class Dog(name: String) : Animal(name) {
+        override fun makeSound() {
+            println("Woof")
+        }
+    }
+
+클래스 인스턴스화 및 메서드 호출)
+    fun main() {
+        val myDog = Dog("Rex")
+        println(myDog.name)          // Rex
+        myDog.makeSound()           // Woof
+    }
+
+
+
+2. 클래스 상속의 기본 규칙
+서브클래스는 기본 클래스의 생성자를 호출해야 합니다. 기본 클래스의 생성자를 호출하려면 super를 사용합니다.
+
+    open class Person(val name: String) {
+        open fun greet() {
+            println("Hello, my name is $name")
+        }
+    }
+
+    class Student(name: String, val studentId: String) : Person(name) {
+        override fun greet() {
+            println("Hi, I'm $name and my student ID is $studentId")
+        }
+    }
+
+
+
+3. 추상 클래스와 추상 메서드
+추상 클래스는 인스턴스를 생성할 수 없으며, 서브클래스에서 구현해야 하는 추상 메서드를 포함할 수 있습니다.
+추상 메서드는 abstract 키워드를 사용하여 정의합니다.
+
+    abstract class Shape {
+        abstract fun area(): Double
+    }
+
+    class Rectangle(val width: Double, val height: Double) : Shape() {
+        override fun area(): Double {
+            return width * height
+        }
+    }
+
+
+
+4. 인터페이스
+인터페이스는 클래스와 유사하지만 다중 상속을 지원합니다. 인터페이스는 메서드의 시그니처만 정의하며, 실제 구현은 클래스를 통해 제공됩니다.
+클래스는 여러 개의 인터페이스를 구현할 수 있습니다.
+    interface Drivable {
+        fun drive()
+    }
+
+    interface Flyable {
+        fun fly()
+    }
+
+    class Bird : Drivable, Flyable {
+        override fun drive() {
+            println("Bird can't drive")
+        }
+
+        override fun fly() {
+            println("Flying high")
+        }
+    }
+
+
+
+5. 동반 객체 (Companion Objects)
+동반 객체는 클래스와 함께 존재하며, 클래스의 인스턴스 없이 접근할 수 있는 정적 메서드와 속성을 정의할 수 있습니다. 이는 클래스의 동반 객체에서 사용됩니다.
+
+    class User private constructor(val name: String) {
+        companion object Factory {
+            fun create(name: String): User {
+                return User(name)
+            }
+        }
+    }
+
+    fun main() {
+        val user = User.create("Alice")
+        println(user.name)  // Alice
+    }
+
