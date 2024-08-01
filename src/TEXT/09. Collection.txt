@@ -1,0 +1,68 @@
+코틀린은 컬렉션 인터페이스, 리스트, 셋, 맵, 그리고 컬렉션 함수를 지원하여 데이터 조작을 간편하게 합니다.
+
+
+1. 컬렉션 인터페이스
+코틀린의 컬렉션 인터페이스는 Collection, List, Set, Map 등을 포함하여 컬렉션의 기본 형태를 정의합니다.
+기본적으로 다음과 같은 인터페이스가 있습니다:
+
+    Collection<T>: 읽기 전용 컬렉션 인터페이스
+    List<T>: 순서가 있는 요소의 목록을 나타내며, 인덱스를 사용해 접근할 수 있습니다.
+    Set<T>: 중복 없는 요소의 집합을 나타냅니다.
+    Map<K, V>: 키와 값 쌍의 집합을 나타냅니다.
+
+
+
+2. 리스트 (List, MutableList)
+리스트는 순서가 있는 요소의 집합입니다. 코틀린에서는 List와 MutableList 두 가지를 제공합니다.
+List는 읽기 전용이며, MutableList는 수정이 가능한 리스트입니다.
+
+    // 읽기 전용 리스트
+    val readOnlyList: List<String> = listOf("Apple", "Banana", "Cherry")
+
+    // 수정 가능한 리스트
+    val mutableList: MutableList<String> = mutableListOf("Apple", "Banana")
+    mutableList.add("Cherry")
+    mutableList.remove("Banana")
+
+    fun main() {
+        println(readOnlyList)  // [Apple, Banana, Cherry]
+        println(mutableList)  // [Apple, Cherry]
+    }
+
+
+
+3. 셋 (Set, MutableSet)
+셋은 중복을 허용하지 않는 요소의 집합입니다. Set과 MutableSet 두 가지를 제공합니다.
+Set은 읽기 전용, MutableSet은 수정 가능한 셋입니다.
+
+    // 읽기 전용 셋
+    val readOnlySet: Set<String> = setOf("Apple", "Banana", "Cherry")
+
+    // 수정 가능한 셋
+    val mutableSet: MutableSet<String> = mutableSetOf("Apple", "Banana")
+    mutableSet.add("Cherry")
+    mutableSet.remove("Banana")
+
+    fun main() {
+        println(readOnlySet)  // [Apple, Banana, Cherry]
+        println(mutableSet)  // [Apple, Cherry]
+    }
+
+
+
+4. 맵 (Map, MutableMap)
+맵은 키와 값의 쌍으로 구성된 컬렉션입니다. Map과 MutableMap 두 가지를 제공합니다.
+Map은 읽기 전용, MutableMap은 수정 가능한 맵입니다.
+
+    // 읽기 전용 맵
+    val readOnlyMap: Map<String, Int> = mapOf("Apple" to 1, "Banana" to 2)
+
+    // 수정 가능한 맵
+    val mutableMap: MutableMap<String, Int> = mutableMapOf("Apple" to 1, "Banana" to 2)
+    mutableMap["Cherry"] = 3
+    mutableMap.remove("Banana")
+
+    fun main() {
+        println(readOnlyMap)  // {Apple=1, Banana=2}
+        println(mutableMap)  // {Apple=1, Cherry=3}
+    }
